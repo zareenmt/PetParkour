@@ -1,0 +1,289 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-1479903178982987647
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 54626104f6c7de94f9976e1672abc45b, type: 3}
+  m_Name: FolderOperation
+  m_EditorClassIdentifier: 
+  actionType: 1
+  actionName: FolderOperation
+  note: Separate BurstDebugInformation
+  actionEnabled: 1
+  configureEditor: 0
+  filter:
+    condition: 0
+    clauses: []
+  inputPath: $BUILDPATH/$PRODUCT_NAME_BurstDebugInformation_DoNotShip
+  outputPath: $BASEPATH/DoNotShip/$VERSION-$ARCHITECTURE-BurstDebugInformation
+  operation: 0
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d5886119a5c7b34d8872ab527ca3e1b, type: 3}
+  m_Name: DefaultBuildSettings
+  m_EditorClassIdentifier: 
+  _basicSettings:
+    baseBuildFolder: Builds
+    buildPath: $VERSION/$RELEASE_TYPE-$PLATFORM-$ARCHITECTURE-$SCRIPTING_BACKEND
+    openFolderPostBuild: 1
+    constantsFileLocation: Assets/SuperUnityBuild
+  _productParameters:
+    buildCounter: 3
+    buildVersion: 2024-09-22-4993
+    versionTemplate: $YEAR-$MONTH-$DAY-$SECONDS
+    autoGenerate: 1
+    syncWithPlayerSettings: 0
+  _releaseTypeList:
+    releaseTypes:
+    - typeName: DefaultRelease
+      bundleIdentifier: com.BlueSquareLegion.TEMPLATE
+      companyName: BlueSquareLegion
+      productName: TEMPLATE
+      syncAppNameWithProduct: 1
+      appBuildName: TEMPLATE
+      buildOptions: 0
+      customDefines: 
+      sceneList:
+        releaseScenes:
+        - fileGUID: 99c9720ab356a0642a771bea13969a05
+          sceneActive: 1
+  _platformList:
+    platforms:
+    - {fileID: 7195266676638434531}
+    - {fileID: 4007342730805565810}
+    - {fileID: 7435010513551536745}
+  _projectConfigurations:
+    configSet:
+      _Buckets: ffffffffffffffffffffffff03000000ffffffff09000000ffffffff080000000200000004000000ffffffffffffffff0700000000000000ffffffff05000000ffffffff
+      _HashCodes: d19a7f21c8008b39be20bc282439f9670a9df835dc71c143b7dc7a18c771ec2a26dbed3988c2685100000000000000000000000000000000000000000000000000000000
+      _Next: ffffffffffffffffffffffffffffffffffffffffffffffff01000000ffffffffffffffff0600000000000000000000000000000000000000000000000000000000000000
+      _Count: 10
+      _Version: 10
+      _FreeList: -1
+      _FreeCount: 0
+      _Keys:
+      - DefaultRelease/WebGL/WebGL/IL2CPP
+      - DefaultRelease/WebGL/WebGL
+      - DefaultRelease/WebGL
+      - DefaultRelease/PC/Windows x64 (App)/Mono
+      - DefaultRelease/PC/Windows x64 (App)
+      - DefaultRelease/PC
+      - DefaultRelease/macOS/macOS (Universal,App)/Mono
+      - DefaultRelease/macOS/macOS (Universal,App)
+      - DefaultRelease/macOS
+      - DefaultRelease
+      - 
+      - 
+      - 
+      - 
+      - 
+      - 
+      - 
+      _Values:
+      - enabled: 0
+        childKeys: []
+      - enabled: 1
+        childKeys:
+        - DefaultRelease/WebGL/WebGL/IL2CPP
+      - enabled: 1
+        childKeys:
+        - DefaultRelease/WebGL/WebGL
+      - enabled: 0
+        childKeys: []
+      - enabled: 1
+        childKeys:
+        - DefaultRelease/PC/Windows x64 (App)/Mono
+      - enabled: 1
+        childKeys:
+        - DefaultRelease/PC/Windows x64 (App)
+      - enabled: 1
+        childKeys: []
+      - enabled: 1
+        childKeys:
+        - DefaultRelease/macOS/macOS (Universal,App)/Mono
+      - enabled: 1
+        childKeys:
+        - DefaultRelease/macOS/macOS (Universal,App)
+      - enabled: 1
+        childKeys:
+        - DefaultRelease/WebGL
+        - DefaultRelease/PC
+        - DefaultRelease/macOS
+      - enabled: 1
+        childKeys: []
+      - enabled: 1
+        childKeys: []
+      - enabled: 1
+        childKeys: []
+      - enabled: 1
+        childKeys: []
+      - enabled: 1
+        childKeys: []
+      - enabled: 1
+        childKeys: []
+      - enabled: 1
+        childKeys: []
+    showViewOptions: 0
+    showConfigs: 0
+    showBuildInfo: 0
+    hideDisabled: 0
+    treeView: 0
+    selectedKeyChain: DefaultRelease/WebGL/WebGL/IL2CPP
+  _preBuildActions:
+    buildActions: []
+  _postBuildActions:
+    buildActions:
+    - {fileID: -1479903178982987647}
+    - {fileID: 5856458712259115522}
+--- !u!114 &4007342730805565810
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2786f6b2301a94f4288672ff5305244c, type: 3}
+  m_Name: PC
+  m_EditorClassIdentifier: 
+  enabled: 1
+  distributionList:
+    distributions: []
+  architectures:
+  - target: 5
+    name: Windows x86
+    enabled: 0
+    binaryNameFormat: '{0}.exe'
+  - target: 19
+    name: Windows x64
+    enabled: 1
+    binaryNameFormat: '{0}.exe'
+  variants:
+  - variantName: Build Output
+    selectedIndex: 0
+    values:
+    - App
+    - Visual Studio Solution
+    isFlag: 0
+  scriptingBackends:
+  - scriptingImplementation: 0
+    name: Mono
+    enabled: 1
+  - scriptingImplementation: 1
+    name: IL2CPP
+    enabled: 0
+  platformName: PC
+  targetGroup: 1
+--- !u!114 &5856458712259115522
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 15b7985b2ca7b4b99a5bc7773881b87a, type: 3}
+  m_Name: BetterUploadItch
+  m_EditorClassIdentifier: 
+  actionType: 1
+  actionName: BetterUploadItch
+  note: 
+  actionEnabled: 1
+  configureEditor: 0
+  filter:
+    condition: 0
+    clauses: []
+  pathToButlerExe: Assets/BuildHelpers/Butler/butler-windows-amd64/butler.exe
+  pathToButlerApp: Assets/BuildHelpers/Butler/butler-darwin-amd64/butler
+  willPublishToItch: 0
+  nameOfItchUser: <USER_NAME>
+  nameOfItchGame: <GAME_NAME>
+  useGeneratedBuildVersion: 0
+  channelName: $PLATFORM-$ARCHITECTURE
+  showUploadProgress: 1
+  itchChannelOverride: 
+--- !u!114 &7195266676638434531
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0acaf75cc66fc934ea46bf602fc7c245, type: 3}
+  m_Name: WebGL
+  m_EditorClassIdentifier: 
+  enabled: 1
+  distributionList:
+    distributions: []
+  architectures:
+  - target: 20
+    name: WebGL
+    enabled: 1
+    binaryNameFormat: '{0}'
+  variants: []
+  scriptingBackends:
+  - scriptingImplementation: 1
+    name: IL2CPP
+    enabled: 1
+  platformName: WebGL
+  targetGroup: 13
+--- !u!114 &7435010513551536745
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d962d142a259c394da2bdb301b72eeb5, type: 3}
+  m_Name: macOS
+  m_EditorClassIdentifier: 
+  enabled: 1
+  distributionList:
+    distributions: []
+  architectures:
+  - target: 2
+    name: macOS
+    enabled: 1
+    binaryNameFormat: '{0}.app'
+  variants:
+  - variantName: macOS Architecture
+    selectedIndex: 2
+    values:
+    - Intelx64
+    - Apple Silicon
+    - Universal
+    isFlag: 0
+  - variantName: Build Output
+    selectedIndex: 0
+    values:
+    - App
+    - Xcode Project
+    isFlag: 0
+  scriptingBackends:
+  - scriptingImplementation: 0
+    name: Mono
+    enabled: 1
+  - scriptingImplementation: 1
+    name: IL2CPP
+    enabled: 0
+  platformName: macOS
+  targetGroup: 1

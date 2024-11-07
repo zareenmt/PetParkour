@@ -1,0 +1,27 @@
+using UnityEngine;
+
+#ROOTNAMESPACEBEGIN#
+
+/// <summary>
+/// 
+/// </summary>
+public class #SCRIPTNAME# : MonoBehaviour
+{
+    /// <summary>
+    /// Start is called before the first frame update
+    /// </summary>
+    void Start()
+    {
+        #NOTRIM#
+    }
+
+    /// <summary>
+    /// Update is called once per frame
+    /// </summary>
+    void Update()
+    {
+        #NOTRIM#
+    }
+}
+
+#ROOTNAMESPACEEND#
