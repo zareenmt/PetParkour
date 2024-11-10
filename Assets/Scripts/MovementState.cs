@@ -24,12 +24,22 @@ public class MovementState : BaseState
     public override void UpdateState(StateManager player)
     {
         _movementInput = new Vector3(Input.GetAxisRaw("Horizontal"), 0f, Input.GetAxisRaw("Vertical"));
+        if (_charControl.isGrounded)
+        {
+            float groundedGravity = -0.05f;
+            _movementInput.y = groundedGravity;
+        }
+        else
+        {
+            float gravity = -9.8f;
+            _movementInput.y += gravity;
+        }
         Vector3 posToLookAt;
         posToLookAt.x = _movementInput.x;
         posToLookAt.y = 0.0f;
         posToLookAt.z = _movementInput.z;
         Quaternion currentRotation = player.transform.rotation;
-       if (_movementInput != Vector3.zero)
+       if (_movementInput.x != 0 || _movementInput.z != 0)
        {
            _movementInput *= speed;
            Quaternion targetRotation = Quaternion.LookRotation(posToLookAt);
