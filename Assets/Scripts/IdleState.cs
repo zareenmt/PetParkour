@@ -5,6 +5,7 @@ using UnityEngine;
 public class IdleState : BaseState
 {
     private Vector3 input;
+
     public override void EnterState(StateManager player)
     {
         

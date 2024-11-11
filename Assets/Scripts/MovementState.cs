@@ -11,9 +11,10 @@ public class MovementState : BaseState
     private float speed;
     private bool _isMoving;
     private float rotationFactorPerFrame =15.0f;
+    private bool _isJumpPressed = false;
+   
     public override void EnterState(StateManager player)
     {
-        _ref = player.GetComponent<PlayerAttributes>();
         _isMoving = true;
         _pAnim = _ref.playerAnim;
         _pAnim.SetBool(_ref.movingHash,_isMoving);
@@ -23,7 +24,7 @@ public class MovementState : BaseState
 
     public override void UpdateState(StateManager player)
     {
-        _movementInput = new Vector3(Input.GetAxisRaw("Horizontal"), 0f, Input.GetAxisRaw("Vertical"));
+        _movementInput = new Vector3(Input.GetAxis("Horizontal"), 0f, Input.GetAxis("Vertical"));
         if (_charControl.isGrounded)
         {
             float groundedGravity = -0.05f;
@@ -52,7 +53,12 @@ public class MovementState : BaseState
            _pAnim.SetBool(_ref.movingHash,_isMoving);
            ExitState(player);
        }
-
+       if (Input.GetKeyDown(KeyCode.Space)&& _charControl.isGrounded)
+       {
+           //set jump animation parameter to true
+           _isJumpPressed = true;
+           ExitState(player);
+       }
     }
     
     public override void ExitState(StateManager player)
@@ -60,6 +66,10 @@ public class MovementState : BaseState
         if (!_isMoving)
         {
             player.SwitchState(player.idleState);
+        }
+        else if (_isJumpPressed)
+        {
+            player.SwitchState(player.jumpState);
         }
     }
 

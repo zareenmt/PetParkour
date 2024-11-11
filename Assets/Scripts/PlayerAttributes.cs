@@ -8,8 +8,7 @@ public class PlayerAttributes : MonoBehaviour
     public int movingHash;
     public int velocityHash;
     public CharacterController charControl;
-
-    private void Awake()
+    public void Awake()
     {
         playerAnim = GetComponent<Animator>();
         movingHash = Animator.StringToHash("isMoving");
