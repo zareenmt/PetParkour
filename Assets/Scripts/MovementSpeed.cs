@@ -7,7 +7,7 @@ public class MovementSpeed : MonoBehaviour {
     public PlayerController Character;
 
     private float defaultSpeed;
-    private float increasedSpeed = 10f;
+    public float increasedSpeed = 10f;
 
     void Start() {
         defaultSpeed = Character.getSpeed();
