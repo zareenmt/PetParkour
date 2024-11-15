@@ -50,9 +50,12 @@ public class PlayerController : MonoBehaviour
         posToLookAt.x = _movementInput.x;
         posToLookAt.y = 0.0f;
         posToLookAt.z = _movementInput.z;
-        Quaternion currentRotation = transform.rotation;
-        Quaternion targetRotation = Quaternion.LookRotation(posToLookAt);
-        transform.rotation = Quaternion.Slerp(currentRotation, targetRotation, rotationFactorPerFrame*Time.deltaTime);
+        
+        if(posToLookAt != Vector3.zero) {
+            Quaternion currentRotation = transform.rotation;
+            Quaternion targetRotation = Quaternion.LookRotation(posToLookAt);
+            transform.rotation = Quaternion.Slerp(currentRotation, targetRotation, rotationFactorPerFrame*Time.deltaTime);
+        }
         
     }
 
@@ -118,5 +121,12 @@ public class PlayerController : MonoBehaviour
             playerAnim.SetBool(jumpingHash,true);
             _movementInput.y = initalJumpVelocity*0.5f;
         }
+    }
+
+    public void setSpeed(float updateSpeed) {
+        speed = updateSpeed;
+    }
+    public float getSpeed() {
+        return speed;
     }
 }
