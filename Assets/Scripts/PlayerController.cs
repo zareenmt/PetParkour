@@ -20,6 +20,8 @@ public class PlayerController : MonoBehaviour
     private float gravity = -9.8f;
     private float groundedGravity = -1f;
     private bool isJumpAnimating;
+    private Camera _mainCam;
+    private Vector3 _direction;
     public void Awake()
     {
         playerAnim = GetComponent<Animator>();
@@ -29,14 +31,15 @@ public class PlayerController : MonoBehaviour
         float timeToApex = maxJumpTime / 2;
         gravity = (-2 * maxJumpHeight) / Mathf.Pow(timeToApex, 2);
         initalJumpVelocity = (2 * maxJumpHeight) / timeToApex;
+        _mainCam = Camera.main;
     }
 
     public void Update()
     {
         _movementInput.x = Input.GetAxis("Horizontal");
         _movementInput.z = Input.GetAxis("Vertical");
-        HandleAnimation();
         HandleRotation();
+        HandleAnimation();
         _movementInput.x *= speed;
         _movementInput.z *= speed;
         charControl.Move(_movementInput*Time.deltaTime);
@@ -51,7 +54,8 @@ public class PlayerController : MonoBehaviour
         posToLookAt.y = 0.0f;
         posToLookAt.z = _movementInput.z;
         
-        if(posToLookAt != Vector3.zero) {
+        if(posToLookAt != Vector3.zero) 
+        {
             Quaternion currentRotation = transform.rotation;
             Quaternion targetRotation = Quaternion.LookRotation(posToLookAt);
             transform.rotation = Quaternion.Slerp(currentRotation, targetRotation, rotationFactorPerFrame*Time.deltaTime);
