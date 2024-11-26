@@ -38,11 +38,14 @@ public class PlayerController : MonoBehaviour
     {
         _movementInput.x = Input.GetAxis("Horizontal");
         _movementInput.z = Input.GetAxis("Vertical");
-        HandleRotation();
         HandleAnimation();
         _movementInput.x *= speed;
         _movementInput.z *= speed;
         charControl.Move(_movementInput*Time.deltaTime);
+        //charControl.Move(transform.forward*_movementInput.z*Time.deltaTime);
+        HandleRotation();
+        //transform.Rotate(Vector3.up*_movementInput.x*Time.deltaTime);
+        //MovePlayerRelativeToCamera(_movementInput);
         HandleGravity();
         HandleJump();
     }
@@ -132,5 +135,19 @@ public class PlayerController : MonoBehaviour
     }
     public float getSpeed() {
         return speed;
+    }
+
+    private void MovePlayerRelativeToCamera(Vector3 movement)
+    {
+        Vector3 forward = Camera.main.transform.forward;
+        Vector3 right = Camera.main.transform.right;
+        forward.y = 0;
+        right.y = 0;
+        forward = forward.normalized;
+        right = right.normalized;
+        Vector3 forwardRelativeVInput = movement.y * forward;
+        Vector3 rightRelativeHInput = movement.x * right;
+        Vector3 camRelativeMove = forwardRelativeVInput + rightRelativeHInput;
+        transform.Translate(camRelativeMove, Space.World);
     }
 }
