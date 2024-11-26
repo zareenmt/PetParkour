@@ -17,14 +17,9 @@ public class PlayerController : MonoBehaviour
     private float initalJumpVelocity;
     private float maxJumpHeight = 6.0f;
     private float maxJumpTime = 0.75f;
-    public float initalJumpVelocity;
-    public float maxJumpHeight = 4.0f;
-    public float maxJumpTime = 0.75f;
     private bool isJumping = false;
     private float gravity = -9.8f;
     private float groundedGravity = -1.3f;
-    public float gravity = -9.8f;
-    private float groundedGravity = -1f;
     private bool isJumpAnimating;
     private Vector3 _direction;
     private Vector3 cameraRelativeMove;
@@ -67,16 +62,9 @@ public class PlayerController : MonoBehaviour
         Quaternion currentRotation = transform.rotation;
         if(posToLookAt != Vector3.zero) 
         {
-        posToLookAt.z = _movementInput.z;
-
-        if(posToLookAt != Vector3.zero) {
-            Quaternion currentRotation = transform.rotation;
             Quaternion targetRotation = Quaternion.LookRotation(posToLookAt);
             transform.rotation = Quaternion.Slerp(currentRotation, targetRotation, rotationFactorPerFrame*Time.deltaTime);
-        } // else {
-        //     transform.rotation = Quaternion.Slerp(transform.rotation, Quaternion.identity, rotationFactorPerFrame*Time.deltaTime);
-        // }
-        // uncomment this if you'd like the character to reset to default orientation when not moving (facing forward)
+        }
         
     }
 
@@ -147,6 +135,13 @@ public class PlayerController : MonoBehaviour
         return speed;
     }
 
+    public void setInitialJump(float updateJump) {
+        initalJumpVelocity = updateJump;
+    }
+    public float getInitialJump() {
+        return initalJumpVelocity;
+    }
+
     private Vector3 ConvertToCamSpace(Vector3 movement)
     {
         float currY = movement.y;
@@ -161,12 +156,5 @@ public class PlayerController : MonoBehaviour
         Vector3 camRelativeMove = (forwardRelativeVInput + rightRelativeHInput);
         camRelativeMove.y = currY;
         return camRelativeMove;
-    }
-
-    public void setMaxJumpHeight(float newJumpHeight){
-        initalJumpVelocity = newJumpHeight;
-    }
-    public float getMaxJumpHeight(){
-        return initalJumpVelocity;
     }
 }
