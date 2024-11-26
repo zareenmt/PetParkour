@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -11,17 +12,19 @@ public class PlayerController : MonoBehaviour
     private Vector3 _movementInput;
     private float speed = 3f;
     private bool _isMoving;
-    private float rotationFactorPerFrame =15.0f;
+    private float rotationFactorPerFrame =10.0f;
     private bool _isJumpPressed = false;
     private float initalJumpVelocity;
-    private float maxJumpHeight = 4.0f;
+    private float maxJumpHeight = 6.0f;
     private float maxJumpTime = 0.75f;
     private bool isJumping = false;
     private float gravity = -9.8f;
-    private float groundedGravity = -1f;
+    private float groundedGravity = -1.3f;
     private bool isJumpAnimating;
-    private Camera _mainCam;
     private Vector3 _direction;
+    private Vector3 cameraRelativeMove;
+    private bool isFalling;
+    [SerializeField] private Transform cam;
     public void Awake()
     {
         playerAnim = GetComponent<Animator>();
@@ -31,35 +34,34 @@ public class PlayerController : MonoBehaviour
         float timeToApex = maxJumpTime / 2;
         gravity = (-2 * maxJumpHeight) / Mathf.Pow(timeToApex, 2);
         initalJumpVelocity = (2 * maxJumpHeight) / timeToApex;
-        _mainCam = Camera.main;
     }
-
+    
     public void Update()
     {
         _movementInput.x = Input.GetAxis("Horizontal");
         _movementInput.z = Input.GetAxis("Vertical");
-        HandleAnimation();
         _movementInput.x *= speed;
         _movementInput.z *= speed;
-        charControl.Move(_movementInput*Time.deltaTime);
-        //charControl.Move(transform.forward*_movementInput.z*Time.deltaTime);
+        HandleAnimation();
+        cameraRelativeMove = ConvertToCamSpace(_movementInput);
+        charControl.Move(cameraRelativeMove*Time.deltaTime);
         HandleRotation();
-        //transform.Rotate(Vector3.up*_movementInput.x*Time.deltaTime);
-        //MovePlayerRelativeToCamera(_movementInput);
         HandleGravity();
         HandleJump();
+
+
+
     }
 
     private void HandleRotation()
     {
         Vector3 posToLookAt;
-        posToLookAt.x = _movementInput.x;
+        posToLookAt.x = cameraRelativeMove.x;
         posToLookAt.y = 0.0f;
-        posToLookAt.z = _movementInput.z;
-        
+        posToLookAt.z = cameraRelativeMove.z;
+        Quaternion currentRotation = transform.rotation;
         if(posToLookAt != Vector3.zero) 
         {
-            Quaternion currentRotation = transform.rotation;
             Quaternion targetRotation = Quaternion.LookRotation(posToLookAt);
             transform.rotation = Quaternion.Slerp(currentRotation, targetRotation, rotationFactorPerFrame*Time.deltaTime);
         }
@@ -83,10 +85,11 @@ public class PlayerController : MonoBehaviour
 
     private void HandleGravity()
     {
-        bool isFalling = _movementInput.y <= 0.0f;
+        isFalling = _movementInput.y <= 0.0f;
         float fallMultiplier = 2.0f;
         if (charControl.isGrounded)
         {
+            isJumping = false;
             if (isJumpAnimating)
             {
                 playerAnim.SetBool(jumpingHash,false);
@@ -114,19 +117,14 @@ public class PlayerController : MonoBehaviour
     {
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            _isJumpPressed = true;
-        }
-        else if (Input.GetKeyUp(KeyCode.Space))
-        {
-            _isJumpPressed = false;
-            isJumping = false;
-        }
-        if (!isJumping && charControl.isGrounded && _isJumpPressed)
-        {
-            isJumping = true;
-            isJumpAnimating = true;
-            playerAnim.SetBool(jumpingHash,true);
-            _movementInput.y = initalJumpVelocity*0.5f;
+            if (!isJumping && charControl.isGrounded)
+            {
+                _isJumpPressed = true;
+                isJumping = true;
+                isJumpAnimating = true;
+                playerAnim.SetBool(jumpingHash,true);
+                _movementInput.y = initalJumpVelocity*0.5f;
+            }
         }
     }
 
@@ -137,17 +135,19 @@ public class PlayerController : MonoBehaviour
         return speed;
     }
 
-    private void MovePlayerRelativeToCamera(Vector3 movement)
+    private Vector3 ConvertToCamSpace(Vector3 movement)
     {
+        float currY = movement.y;
         Vector3 forward = Camera.main.transform.forward;
         Vector3 right = Camera.main.transform.right;
         forward.y = 0;
         right.y = 0;
         forward = forward.normalized;
         right = right.normalized;
-        Vector3 forwardRelativeVInput = movement.y * forward;
+        Vector3 forwardRelativeVInput = movement.z * forward;
         Vector3 rightRelativeHInput = movement.x * right;
-        Vector3 camRelativeMove = forwardRelativeVInput + rightRelativeHInput;
-        transform.Translate(camRelativeMove, Space.World);
+        Vector3 camRelativeMove = (forwardRelativeVInput + rightRelativeHInput);
+        camRelativeMove.y = currY;
+        return camRelativeMove;
     }
 }
