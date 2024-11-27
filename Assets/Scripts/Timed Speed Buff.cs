@@ -6,7 +6,7 @@ public class TimedSpeedBuff : MonoBehaviour {
 
     public PlayerController Character;
 
-    public float duration = 10f;
+    public float duration = 5f;
     public float buffedSpeed = 5f;
     private float defaultSpeed;
 
