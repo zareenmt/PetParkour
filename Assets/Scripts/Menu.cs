@@ -6,9 +6,23 @@ using UnityEngine.SceneManagement;
 public class Menu : MonoBehaviour
 {
     public GameObject optionsOverlay;
+    public AnimationCurve animationCurve;
+    private Vector3 hiddenPosition = new Vector3(0, 1200, 0);
+    private Vector3 visiblePosition = new Vector3(0, 0, 0);
+    public float animationDuration = 1f;
+
+    public CanvasGroup fadePanel;
+    public float fadeDuration = 1f;
+
+    private Coroutine animationCoroutine;
+
+    private void Start() {
+        optionsOverlay.transform.localPosition = hiddenPosition;
+        fadePanel.alpha = 0f;
+    }
 
     public void onPlayButton() {
-        SceneManager.LoadScene(1);
+        StartCoroutine(FadeScene(1));
     }
     
     public void onExitButton() {
@@ -16,10 +30,32 @@ public class Menu : MonoBehaviour
     }
 
     public void onOptionsButtonOpen() {
-        optionsOverlay.SetActive(true);
+        animationCoroutine = StartCoroutine(AnimateOverlay(hiddenPosition, visiblePosition));
     }
 
     public void onOptionsButtonClose() {
-        optionsOverlay.SetActive(false);
+        animationCoroutine = StartCoroutine(AnimateOverlay(visiblePosition, hiddenPosition));
+    }
+
+    private IEnumerator AnimateOverlay(Vector3 start, Vector3 end) {
+        float elapsedTime = 0f;
+        while (elapsedTime < animationDuration) {
+            float t = elapsedTime / animationDuration;
+            float curveValue = animationCurve.Evaluate(t);
+            optionsOverlay.transform.localPosition = Vector3.Lerp(start, end, curveValue);
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+    }
+
+    private IEnumerator FadeScene(int scene) {
+        float elapsedTime = 0f;
+        while (elapsedTime < fadeDuration) {
+            float t = elapsedTime / fadeDuration;
+            fadePanel.alpha = t;
+            elapsedTime += Time.deltaTime;
+            yield return null;
+        }
+        SceneManager.LoadScene(scene);
     }
 }
