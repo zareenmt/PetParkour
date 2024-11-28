@@ -12,6 +12,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Main Menu.unity
     guid: 6273819c0c1ebcc4c80efba1cde004b8
   - enabled: 1
+    path: Assets/Scenes/MainScene.unity
+    guid: f950d15fcca54da4b8388c602f1f1050
+  - enabled: 0
     path: Assets/Scenes/cartiv_speed.unity
     guid: bdf77cc7ab69b164dafa83d1ce2d2648
   m_configObjects:
