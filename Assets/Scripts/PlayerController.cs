@@ -10,7 +10,7 @@ public class PlayerController : MonoBehaviour
     public int jumpingHash;
     public CharacterController charControl;
     private Vector3 _movementInput;
-    private float speed = 3f;
+    private float speed = 6f;
     private bool _isMoving;
     private float rotationFactorPerFrame =10.0f;
     private bool _isJumpPressed = false;
