@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 public class Menu : MonoBehaviour
 {
@@ -16,9 +17,21 @@ public class Menu : MonoBehaviour
 
     private Coroutine animationCoroutine;
 
+    public Slider volumeSlider;
+    private AudioSource backgroundMusicSource;
+
     private void Start() {
         optionsOverlay.transform.localPosition = hiddenPosition;
         fadePanel.alpha = 0f;
+
+        if (volumeSlider != null) {
+            BackgroundMusicManager musicManager = FindObjectOfType<BackgroundMusicManager>();
+            if (musicManager != null) {
+                float currentVolume = musicManager.GetVolume();
+                volumeSlider.value = currentVolume; // Initialize slider to current volume
+                volumeSlider.onValueChanged.AddListener(SetVolume);
+            }
+        }
     }
 
     public void onPlayButton() {
@@ -57,5 +70,13 @@ public class Menu : MonoBehaviour
             yield return null;
         }
         SceneManager.LoadScene(scene);
+    }
+
+    public void SetVolume(float volume) {
+        BackgroundMusicManager musicManager = FindObjectOfType<BackgroundMusicManager>();
+
+        if (musicManager != null) {
+            musicManager.SetVolume(volume);
+        }
     }
 }

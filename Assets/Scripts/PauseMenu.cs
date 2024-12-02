@@ -10,6 +10,8 @@ public class PauseMenu : MonoBehaviour
 
     private bool isPaused = false;
     public float fadeDuration = 1f;
+    private bool musicPausedTransistion = false;
+    private bool musicPlaying = false;
 
     private void Start() {
         optionsPanel.SetActive(false);
@@ -23,6 +25,17 @@ public class PauseMenu : MonoBehaviour
                 ResumeGame();
             } else {
                 PauseGame();
+            }
+        }
+
+        if (SceneManager.GetActiveScene().name == "MainScene" && !musicPausedTransistion && !musicPlaying) {
+            BackgroundMusicManager musicManager = FindObjectOfType<BackgroundMusicManager>();
+            if (musicManager != null) {
+                AudioSource audioSource = musicManager.GetComponent<AudioSource>();
+                if (audioSource != null && !audioSource.isPlaying) {
+                    audioSource.Play();
+                    musicPlaying = true;
+                }
             }
         }
     }
@@ -41,8 +54,15 @@ public class PauseMenu : MonoBehaviour
 
     public void ExitToMainMenu() {
         Time.timeScale = 1f;
+        BackgroundMusicManager musicManager = FindObjectOfType<BackgroundMusicManager>();
+        if (musicManager != null) {
+            AudioSource audioSource = musicManager.GetComponent<AudioSource>();
+            if (audioSource != null && audioSource.isPlaying) {
+                audioSource.Pause();
+                musicPausedTransistion = true;
+            }
+        }
         StartCoroutine(FadeScene(0));
-        //SceneManager.LoadScene(0);
     }
 
     private IEnumerator FadeScene(int scene) {
@@ -57,5 +77,7 @@ public class PauseMenu : MonoBehaviour
         }
         SceneManager.LoadScene(scene);
         fadePanel.blocksRaycasts = false;
+
+        musicPausedTransistion = false;
     }
 }
