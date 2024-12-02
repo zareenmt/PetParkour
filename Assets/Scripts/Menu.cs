@@ -8,7 +8,7 @@ public class Menu : MonoBehaviour
 {
     public GameObject optionsOverlay;
     public AnimationCurve animationCurve;
-    private Vector3 hiddenPosition = new Vector3(0, 1200, 0);
+    private Vector3 hiddenPosition = new Vector3(0, 1800, 0);
     private Vector3 visiblePosition = new Vector3(0, 0, 0);
     public float animationDuration = 1f;
 
