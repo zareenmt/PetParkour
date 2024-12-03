@@ -8,6 +8,7 @@ public class JumpBoost : MonoBehaviour
 
     private float defaultHeight;
     public float heightIncreased = 40f;
+    public bool isJumpBoosted = false;
 
 
     void Start(){
@@ -17,12 +18,14 @@ public class JumpBoost : MonoBehaviour
     private void OnTriggerEnter(Collider area) {
         if (area.CompareTag("JumpBoost")) {
             plr.setInitialJump(heightIncreased);
+            isJumpBoosted = true;
         }
     }
 
     private void OnTriggerExit(Collider area) {
         if (area.CompareTag("JumpBoost")) {
             plr.setInitialJump(defaultHeight);
+            isJumpBoosted = false;
         }
     }
 }

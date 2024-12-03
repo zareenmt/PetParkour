@@ -11,13 +11,13 @@ public class PlayerController : MonoBehaviour
     public CharacterController charControl;
     private Vector3 _movementInput;
     private float speed = 6f;
-    private bool _isMoving;
+    public bool _isMoving;
     private float rotationFactorPerFrame =10.0f;
     private bool _isJumpPressed = false;
     private float initalJumpVelocity;
     private float maxJumpHeight = 6.0f;
     private float maxJumpTime = 0.75f;
-    private bool isJumping = false;
+    public bool isJumping = false;
     private float gravity = -9.8f;
     private float groundedGravity = -1.3f;
     private bool isJumpAnimating;

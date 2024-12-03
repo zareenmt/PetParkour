@@ -15,15 +15,13 @@ public class BackgroundMusicManager : MonoBehaviour
 
     void Start() {
         if (audioSource != null) {
-            audioSource.volume = PlayerPrefs.GetFloat("Volume", 1f);
+            audioSource.volume = 0.3333f;
         }
     }
 
     public void SetVolume(float volume) {
         if (audioSource != null) {
             audioSource.volume = Mathf.Clamp01(volume);
-            PlayerPrefs.SetFloat("Volume", volume);
-            PlayerPrefs.Save();
         }
     }
 

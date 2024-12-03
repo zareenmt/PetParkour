@@ -15,6 +15,7 @@ public class MenuMusic : MonoBehaviour
         if (audioSource != null) {
             audioSource.loop = true;
             audioSource.Play();
+            audioSource.volume = 0.5f;
         }
     }
 
